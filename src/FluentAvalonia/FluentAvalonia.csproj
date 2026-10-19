@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net10.0</TargetFrameworks>
@@ -9,7 +9,11 @@
     <PackageId>FluentAvaloniaUI</PackageId>
     <IsAotCompatible>true</IsAotCompatible>
 
-    <NoWarn>$(NoWarn);NU1507</NoWarn>
+    <NoWarn>$(NoWarn);NU1507;CS2002;NU1902</NoWarn>
+    <!-- The MicroCom generator writes WinRT.Generated.cs under obj/ and also includes
+         it explicitly, while the SDK's default compile glob already picks it up, so
+         the file is compiled twice (CS2002). Same content, so it is harmless.
+         NU1902 is the upstream Avalonia.SourceLink dependency chain, not our code. -->
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
